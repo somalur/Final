@@ -1,0 +1,1552 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Untitled5}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+         \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sm}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{r2\PYZus{}score}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{p}{)}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{n}{df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}excel}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{test.xlsx}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{n}{df}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}80}]:} (12431, 34)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{n}{df}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}81}]:} True
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}82}]:} \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{n}{df}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}83}]:} False
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}84}]:} \PY{n}{df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}84}]:}      Area                      Road\_Name    Carriageway\_Start\_Name  \textbackslash{}
+         1   South                 Kirkbride Road                Westney Rd   
+         2   North  COATESVILLE RIVERHEAD HIGHWAY            RIVERHEAD ROAD   
+         3   North  COATESVILLE RIVERHEAD HIGHWAY          STATE HIGHWAY 17   
+         8   South                  Buckland Road          Allen St Mangere   
+         9   South                 Kirkbride Road  Mckenzie Rd Kirkbride Rd   
+         10  South                    Massey Road             Buckland Road   
+         11  South                    Massey Road              Imrie Avenue   
+         12  South                    Massey Road          Tennessee Avenue   
+         13  South                    Massey Road     Plumley Crescent East   
+         14  South                  Mckenzie Road     Walmsley Rd-Miller Rd   
+         
+                  Carriageway\_End\_Name  \textbackslash{}
+         1   End 750 Massey Rd Moble S   
+         2            STATE HIGHWAY 16   
+         3                WIDTH CHANGE   
+         8                 Massey Road   
+         9                Idlewild Ave   
+         10              Walter Street   
+         11             Friesian Drive   
+         12               Viola Avenue   
+         13                Thomas Road   
+         14              Coronation Rd   
+         
+                                                   Description Direction  \textbackslash{}
+         1   !Kirkbride Rd ((Approx 80m east Westney Rd - o{\ldots}      Both   
+         2                  Coatsville-Riverhead Highway 80kph      Both   
+         3                          C-R H'way 50m S SH17 80kph      Both   
+         8   !Buckland Rd (Approx 50m north Allen St outsid{\ldots}      Both   
+         9   !Kirkbride Rd (Approx 60 north of Idlewild Ave{\ldots}      Both   
+         10  !Massey Rd (Approx 40m west Walter St outside {\ldots}      Both   
+         11  !Massey Rd (Approx 15m east Tussock Ave outsid{\ldots}      Both   
+         12  !Massey Rd (Approx 120m east of Viola Ave outs{\ldots}      Both   
+         13  !Massey Rd (Approx 100m east Thomas Rd outside{\ldots}      Both   
+         14  !McKenzie Rd (Approx 170m north Walmsley Rd ou{\ldots}      Both   
+         
+            Count\_Start\_Date  Monday\_Volume  Tuesday\_Volume  Wednesday\_Volume  \textbackslash{}
+         1        2012-07-15   15758.545455    14445.333333      19260.444444   
+         2        2012-07-16    4825.090909     4423.000000       5897.333333   
+         3        2012-07-16    5563.636364     5100.000000       6800.000000   
+         8        2012-07-16    9506.545455     8714.333333      11619.111111   
+         9        2012-07-16    9267.818182     8495.500000      11327.333333   
+         10       2012-07-16   17600.909091    16134.166667      21512.222222   
+         11       2012-07-16   21258.727273    19487.166667      25982.888889   
+         12       2012-07-16   20052.727273    18381.666667      24508.888889   
+         13       2012-07-16   16210.363636    14859.500000      19812.666667   
+         14       2012-07-16   12940.545455    11862.166667      15816.222222   
+         
+                      {\ldots}                  MCV     HCV-I    HCV-II  HCV Total  \textbackslash{}
+         1            {\ldots}             0.043076  0.008812  0.003941   0.055830   
+         2            {\ldots}             0.026518  0.012290  0.003468   0.042277   
+         3            {\ldots}             0.029010  0.012615  0.003264   0.044890   
+         8            {\ldots}             0.016056  0.003327  0.000621   0.020004   
+         9            {\ldots}             0.089084  0.016744  0.012438   0.118267   
+         10           {\ldots}             0.024850  0.012285  0.006501   0.043636   
+         11           {\ldots}             0.031173  0.008599  0.003744   0.043515   
+         12           {\ldots}             0.030833  0.005605  0.002403   0.038842   
+         13           {\ldots}             0.032947  0.008165  0.006069   0.047181   
+         14           {\ldots}             0.029388  0.015066  0.009052   0.053506   
+         
+             AM-Non-Peak-Hours  AM-Non-Peak-Hour-Volume  Mid-Day-Non-Peak-Hour-Time  \textbackslash{}
+         1                0901                     85.0                      1235.0   
+         2                0902                    160.0                      1244.0   
+         3                0903                    104.0                      1230.0   
+         8                0908                    142.0                      1239.0   
+         9                0909                    142.0                      1240.0   
+         10               0910                    132.0                      1230.0   
+         11               0911                    129.0                      1240.0   
+         12               0912                    101.0                      1230.0   
+         13               0913                    103.0                      1240.0   
+         14               0914                     97.0                      1242.0   
+         
+             Mid-Day-Non-Peak-Volume  PM-Non-Peak-Hours  PM-Non-Peak-Hour-Volume  
+         1                       155             1626.0                    189.0  
+         2                       118             1626.0                    133.0  
+         3                       106             1625.0                    158.0  
+         8                       118             1615.0                    176.0  
+         9                       104             1621.0                    156.0  
+         10                      117             1625.0                    130.0  
+         11                      149             1626.0                    175.0  
+         12                      199             1621.0                    131.0  
+         13                      100             1623.0                    182.0  
+         14                      123             1628.0                    197.0  
+         
+         [10 rows x 34 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}85}]:} \PY{n}{dftest}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count\PYZus{}Start\PYZus{}Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Monday\PYZus{}Volume}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Tuesday\PYZus{}Volume}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Wednesday\PYZus{}Volume}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Thursday\PYZus{}Volume}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Friday\PYZus{}Volume}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Saturday\PYZus{}Volume}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sunday\PYZus{}Volume}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Seven\PYZus{}Day\PYZus{}ADT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{n}{dftest}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{l+m+mi}{100}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}86}]:}     Count\_Start\_Date  Monday\_Volume  Tuesday\_Volume  Wednesday\_Volume  \textbackslash{}
+         78        2012-07-27    1602.727273     1469.166667       1958.888889   
+         79        2012-07-27    1253.818182     1149.333333       1532.444444   
+         80        2012-07-28    3577.636364     3279.500000       4372.666667   
+         81        2012-07-28    4502.000000     4126.833333       5502.444444   
+         82        2012-07-28    8516.363636     7806.666667      10408.888889   
+         83        2012-07-28    8534.727273     7823.500000      10431.333333   
+         84        2012-07-28    4746.909091     4351.333333       5801.777778   
+         85        2012-07-28    1824.727273     1672.666667       2230.222222   
+         87        2012-07-28   11054.545455    10133.333333      13511.111111   
+         88        2012-07-28    1885.272727     1728.166667       2304.222222   
+         89        2012-07-28   11817.636364    10832.833333      14443.777778   
+         90        2012-07-28    9407.636364     8623.666667      11498.222222   
+         91        2012-07-28    4237.454545     3884.333333       5179.111111   
+         93        2012-07-28    5800.909091     5317.500000       7090.000000   
+         94        2012-07-28     498.363636      456.833333        609.111111   
+         95        2012-07-28    6544.000000     5998.666667       7998.222222   
+         96        2012-07-28     563.636364      516.666667        688.888889   
+         97        2012-07-28    2265.454545     2076.666667       2768.888889   
+         98        2012-07-28    3917.636364     3591.166667       4788.222222   
+         99        2012-07-28     405.454545      371.666667        495.555556   
+         100       2012-07-28    4444.727273     4074.333333       5432.444444   
+         101       2012-07-29    6153.272727     5640.500000       7520.666667   
+         102       2012-07-30      85.636364       78.500000        104.666667   
+         103       2012-07-30    4204.363636     3854.000000       5138.666667   
+         104       2012-07-30    5770.909091     5290.000000       7053.333333   
+         105       2012-07-31    7806.727273     7156.166667       9541.555556   
+         106       2012-07-31    2272.727273     2083.333333       2777.777778   
+         107       2012-07-31    5614.909091     5147.000000       6862.666667   
+         108       2012-07-31    2210.727273     2026.500000       2702.000000   
+         109       2012-08-01     340.181818      311.833333        415.777778   
+         ..               {\ldots}            {\ldots}             {\ldots}               {\ldots}   
+         150       2012-08-14     695.636364      637.666667        850.222222   
+         151       2012-08-14    2151.454545     1972.166667       2629.555556   
+         152       2012-08-15    7751.636364     7105.666667       9474.222222   
+         153       2012-08-15    3091.090909     2833.500000       3778.000000   
+         154       2012-08-15    5250.000000     4812.500000       6416.666667   
+         155       2012-08-17     857.454545      786.000000       1048.000000   
+         156       2012-08-17    4069.090909     3730.000000       4973.333333   
+         157       2012-08-17    3170.727273     2906.500000       3875.333333   
+         158       2012-08-17     538.181818      493.333333        657.777778   
+         159       2012-08-17     753.818182      691.000000        921.333333   
+         160       2012-08-17    1070.363636      981.166667       1308.222222   
+         161       2012-08-17    9681.818182     8875.000000      11833.333333   
+         162       2012-08-17    1079.090909      989.166667       1318.888889   
+         163       2012-08-18     835.818182      766.166667       1021.555556   
+         164       2012-08-18    2721.272727     2494.500000       3326.000000   
+         165       2012-08-18    3126.727273     2866.166667       3821.555556   
+         166       2012-08-18    2609.272727     2391.833333       3189.111111   
+         167       2012-08-18    3751.272727     3438.666667       4584.888889   
+         168       2012-08-18   18189.272727    16673.500000      22231.333333   
+         169       2012-08-19    3259.454545     2987.833333       3983.777778   
+         170       2012-08-19    3751.636364     3439.000000       4585.333333   
+         171       2012-08-19    2827.454545     2591.833333       3455.777778   
+         172       2012-08-19    2746.545455     2517.666667       3356.888889   
+         173       2012-08-19    2638.545455     2418.666667       3224.888889   
+         174       2012-08-19    3211.818182     2944.166667       3925.555556   
+         175       2012-08-19    1191.818182     1092.500000       1456.666667   
+         176       2012-08-20    3316.727273     3040.333333       4053.777778   
+         177       2012-08-21     429.818182      394.000000        525.333333   
+         178       2012-08-22    1198.181818     1098.333333       1464.444444   
+         179       2012-08-22    1608.909091     1474.833333       1966.444444   
+         
+              Thursday\_Volume  Friday\_Volume  Saturday\_Volume  Sunday\_Volume  \textbackslash{}
+         78       1356.153846    1259.285714           1783.0         1397.0   
+         79       1060.923077     985.142857           1552.0         1092.0   
+         80       3027.230769    2811.000000           1812.0         1191.0   
+         81       3809.384615    3537.285714           1558.0          801.0   
+         82       7206.153846    6691.428571           8958.0         7343.0   
+         83       7221.692308    6705.857143           3318.0         1714.0   
+         84       4016.615385    3729.714286           4024.0         3101.0   
+         85       1544.000000    1433.714286           2070.0         1449.0   
+         87       9353.846154    8685.714286          13183.0         8678.0   
+         88       1595.230769    1481.285714           1896.0         1520.0   
+         89       9999.538462    9285.285714          11121.0         7524.0   
+         90       7960.307692    7391.714286           9290.0         6220.0   
+         91       3585.538462    3329.428571           4939.0         3358.0   
+         93       4908.461538    4557.857143           7025.0         5068.0   
+         94        421.692308     391.571429            285.0          209.0   
+         95       5537.230769    5141.714286           7305.0         5063.0   
+         96        476.923077     442.857143            594.0          403.0   
+         97       1916.923077    1780.000000           2163.0         1475.0   
+         98       3314.923077    3078.142857           4093.0         3173.0   
+         99        343.076923     318.571429            558.0          400.0   
+         100      3760.923077    3492.285714           4563.0         3267.0   
+         101      5206.615385    4834.714286           5175.0         3838.0   
+         102        72.461538      67.285714             90.0          127.0   
+         103      3557.538462    3303.428571           4655.0         4281.0   
+         104      4883.076923    4534.285714           6867.0         5211.0   
+         105      6605.692308    6133.857143           6422.0         4861.0   
+         106      1923.076923    1785.714286           1789.0         1297.0   
+         107      4751.076923    4411.714286           3049.0         1720.0   
+         108      1870.615385    1737.000000           1934.0         1400.0   
+         109       287.846154     267.285714            398.0          359.0   
+         ..               {\ldots}            {\ldots}              {\ldots}            {\ldots}   
+         150       588.615385     546.571429            725.0          536.0   
+         151      1820.461538    1690.428571           2071.0         1421.0   
+         152      6559.076923    6090.571429           6851.0         3225.0   
+         153      2615.538462    2428.714286           3415.0         2839.0   
+         154      4442.307692    4125.000000           4281.0         3301.0   
+         155       725.538462     673.714286            932.0          715.0   
+         156      3443.076923    3197.142857           3887.0         2973.0   
+         157      2682.923077    2491.285714           3322.0         2343.0   
+         158       455.384615     422.857143            582.0          503.0   
+         159       637.846154     592.285714            917.0          827.0   
+         160       905.692308     841.000000           1238.0         1186.0   
+         161      8192.307692    7607.142857           9243.0         8622.0   
+         162       913.076923     847.857143           1100.0         1022.0   
+         163       707.230769     656.714286           1092.0          875.0   
+         164      2302.615385    2138.142857           3077.0         2722.0   
+         165      2645.692308    2456.714286           3229.0         2808.0   
+         166      2207.846154    2050.142857           2932.0         2368.0   
+         167      3174.153846    2947.428571           2926.0         2442.0   
+         168     15390.923077   14291.571429          19535.0        16730.0   
+         169      2758.000000    2561.000000           2860.0         2416.0   
+         170      3174.461538    2947.714286           3490.0         2600.0   
+         171      2392.461538    2221.571429           3028.0         2054.0   
+         172      2324.000000    2158.000000           2582.0         2036.0   
+         173      2232.615385    2073.142857           3632.0         2583.0   
+         174      2717.692308    2523.571429           3177.0         2480.0   
+         175      1008.461538     936.428571           1599.0         1070.0   
+         176      2806.461538    2606.000000           3043.0         2416.0   
+         177       363.692308     337.714286            501.0          401.0   
+         178      1013.846154     941.428571            952.0          812.0   
+         179      1361.384615    1264.142857           1295.0          959.0   
+         
+              Seven\_Day\_ADT  
+         78     1713.571429  
+         79     1362.857143  
+         80     3240.000000  
+         81     3874.285714  
+         82     9020.142857  
+         83     7424.714286  
+         84     4747.571429  
+         85     1936.428571  
+         87    11808.714286  
+         88     1969.285714  
+         89    11948.857143  
+         90     9607.428571  
+         91     4514.714286  
+         93     6285.428571  
+         94      462.142857  
+         95     6908.571429  
+         96      585.285714  
+         97     2299.714286  
+         98     4116.142857  
+         99      455.428571  
+         100    4610.857143  
+         101    6122.285714  
+         102      98.285714  
+         103    4580.000000  
+         104    6259.714286  
+         105    7745.714286  
+         106    2226.571429  
+         107    5093.000000  
+         108    2213.285714  
+         109     375.428571  
+         ..             {\ldots}  
+         150     726.714286  
+         151    2189.285714  
+         152    7530.000000  
+         153    3322.142857  
+         154    5208.142857  
+         155     909.000000  
+         156    4177.142857  
+         157    3300.571429  
+         158     577.857143  
+         159     841.428571  
+         160    1187.285714  
+         161   10159.285714  
+         162    1151.000000  
+         163     937.714286  
+         164    2966.571429  
+         165    3319.142857  
+         166    2807.285714  
+         167    3714.285714  
+         168   19472.285714  
+         169    3314.714286  
+         170    3817.714286  
+         171    2947.571429  
+         172    2817.714286  
+         173    2961.000000  
+         174    3331.714286  
+         175    1317.714286  
+         176    3385.857143  
+         177     466.571429  
+         178    1193.428571  
+         179    1586.142857  
+         
+         [100 rows x 9 columns]
+\end{Verbatim}
+            
+    \section{Converting Categorical Data to Numeric
+Data}\label{converting-categorical-data-to-numeric-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}87}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{LabelEncoder} 
+         \PY{k+kn}{import} \PY{n+nn}{datetime} \PY{k}{as} \PY{n+nn}{dt}
+         
+           
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}88}]:} \PY{n}{dftest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count\PYZus{}Start\PYZus{}Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{dftest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count\PYZus{}Start\PYZus{}Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{dftest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count\PYZus{}Start\PYZus{}Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{dftest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count\PYZus{}Start\PYZus{}Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{dt}\PY{o}{.}\PY{n}{datetime}\PY{o}{.}\PY{n}{toordinal}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:1: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row\_indexer,col\_indexer] = value instead
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+  """Entry point for launching an IPython kernel.
+/anaconda3/lib/python3.6/site-packages/ipykernel\_launcher.py:2: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row\_indexer,col\_indexer] = value instead
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+  
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}89}]:} \PY{n}{le} \PY{o}{=} \PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)} 
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{n}{dftest}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count\PYZus{}Start\PYZus{}Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}92}]:} 1      734699
+         2      734700
+         3      734700
+         8      734700
+         9      734700
+         10     734700
+         11     734700
+         12     734700
+         13     734700
+         14     734700
+         15     734700
+         16     734700
+         17     734700
+         18     734702
+         19     734702
+         20     734702
+         21     734702
+         22     734702
+         23     734702
+         24     734702
+         25     734703
+         26     734703
+         27     734703
+         28     734703
+         29     734703
+         30     734703
+         31     734703
+         32     734703
+         33     734703
+         34     734703
+                 {\ldots}  
+         150    734729
+         151    734729
+         152    734730
+         153    734730
+         154    734730
+         155    734732
+         156    734732
+         157    734732
+         158    734732
+         159    734732
+         160    734732
+         161    734732
+         162    734732
+         163    734733
+         164    734733
+         165    734733
+         166    734733
+         167    734733
+         168    734733
+         169    734734
+         170    734734
+         171    734734
+         172    734734
+         173    734734
+         174    734734
+         175    734734
+         176    734735
+         177    734736
+         178    734737
+         179    734737
+         Name: Count\_Start\_Date, Length: 172, dtype: int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}93}]:} \PY{n}{train\PYZus{}set}\PY{p}{,} \PY{n}{test\PYZus{}set} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{dftest}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{42}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}94}]:} \PY{n}{dftest\PYZus{}copy} \PY{o}{=} \PY{n}{train\PYZus{}set}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}95}]:} \PY{n}{dftest\PYZus{}copy}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}95}]:}      Count\_Start\_Date  Monday\_Volume  Tuesday\_Volume  Wednesday\_Volume  \textbackslash{}
+         85             734712    1824.727273     1672.666667       2230.222222   
+         91             734712    4237.454545     3884.333333       5179.111111   
+         44             734704    3875.636364     3552.666667       4736.888889   
+         105            734715    7806.727273     7156.166667       9541.555556   
+         94             734712     498.363636      456.833333        609.111111   
+         169            734734    3259.454545     2987.833333       3983.777778   
+         175            734734    1191.818182     1092.500000       1456.666667   
+         152            734730    7751.636364     7105.666667       9474.222222   
+         52             734705    1285.454545     1178.333333       1571.111111   
+         102            734714      85.636364       78.500000        104.666667   
+         147            734729    2483.272727     2276.333333       3035.111111   
+         66             734711    4033.818182     3697.666667       4930.222222   
+         79             734711    1253.818182     1149.333333       1532.444444   
+         38             734704    1309.636364     1200.500000       1600.666667   
+         128            734719    4014.545455     3680.000000       4906.666667   
+         136            734721    4503.636364     4128.333333       5504.444444   
+         145            734728    1273.818182     1167.666667       1556.888889   
+         67             734711    2518.363636     2308.500000       3078.000000   
+         178            734737    1198.181818     1098.333333       1464.444444   
+         116            734718    1590.909091     1458.333333       1944.444444   
+         119            734718    5977.090909     5479.000000       7305.333333   
+         113            734716    2475.272727     2269.000000       3025.333333   
+         58             734710    1122.181818     1028.666667       1371.555556   
+         10             734700   17600.909091    16134.166667      21512.222222   
+         134            734720    1736.909091     1592.166667       2122.888889   
+         8              734700    9506.545455     8714.333333      11619.111111   
+         167            734733    3751.272727     3438.666667       4584.888889   
+         54             734705    2619.272727     2401.000000       3201.333333   
+         40             734704     948.727273      869.666667       1159.555556   
+         87             734712   11054.545455    10133.333333      13511.111111   
+         ..                {\ldots}            {\ldots}             {\ldots}               {\ldots}   
+         115            734718     750.909091      688.333333        917.777778   
+         55             734705    1614.363636     1479.833333       1973.111111   
+         177            734736     429.818182      394.000000        525.333333   
+         63             734711     751.454545      688.833333        918.444444   
+         53             734705    1762.727273     1615.833333       2154.444444   
+         96             734712     563.636364      516.666667        688.888889   
+         26             734703    4880.000000     4473.333333       5964.444444   
+         62             734711    2410.181818     2209.333333       2945.777778   
+         174            734734    3211.818182     2944.166667       3925.555556   
+         137            734721    6872.000000     6299.333333       8399.111111   
+         42             734704     438.000000      401.500000        535.333333   
+         170            734734    3751.636364     3439.000000       4585.333333   
+         2              734700    4825.090909     4423.000000       5897.333333   
+         57             734705    5802.909091     5319.333333       7092.444444   
+         157            734732    3170.727273     2906.500000       3875.333333   
+         138            734722    1259.454545     1154.500000       1539.333333   
+         159            734732     753.818182      691.000000        921.333333   
+         111            734716    8667.272727     7945.000000      10593.333333   
+         107            734715    5614.909091     5147.000000       6862.666667   
+         124            734719    1386.545455     1271.000000       1694.666667   
+         95             734712    6544.000000     5998.666667       7998.222222   
+         80             734712    3577.636364     3279.500000       4372.666667   
+         129            734719    5591.454545     5125.500000       6834.000000   
+         179            734737    1608.909091     1474.833333       1966.444444   
+         25             734703    1030.181818      944.333333       1259.111111   
+         77             734711     707.090909      648.166667        864.222222   
+         114            734716    6113.636364     5604.166667       7472.222222   
+         19             734702     321.454545      294.666667        392.888889   
+         100            734712    4444.727273     4074.333333       5432.444444   
+         110            734716     423.090909      387.833333        517.111111   
+         
+              Thursday\_Volume  Friday\_Volume  Saturday\_Volume  Sunday\_Volume  \textbackslash{}
+         85       1544.000000    1433.714286           2070.0         1449.0   
+         91       3585.538462    3329.428571           4939.0         3358.0   
+         44       3279.384615    3045.142857           3896.0         2961.0   
+         105      6605.692308    6133.857143           6422.0         4861.0   
+         94        421.692308     391.571429            285.0          209.0   
+         169      2758.000000    2561.000000           2860.0         2416.0   
+         175      1008.461538     936.428571           1599.0         1070.0   
+         152      6559.076923    6090.571429           6851.0         3225.0   
+         52       1087.692308    1010.000000           1004.0          687.0   
+         102        72.461538      67.285714             90.0          127.0   
+         147      2101.230769    1951.142857           2108.0         1626.0   
+         66       3413.230769    3169.428571           3625.0         2715.0   
+         79       1060.923077     985.142857           1552.0         1092.0   
+         38       1108.153846    1029.000000           1614.0         1232.0   
+         128      3396.923077    3154.285714           3171.0         2402.0   
+         136      3810.769231    3538.571429           3701.0         2705.0   
+         145      1077.846154    1000.857143           1415.0         1286.0   
+         67       2130.923077    1978.714286           1987.0         1589.0   
+         178      1013.846154     941.428571            952.0          812.0   
+         116      1346.153846    1250.000000           1868.0         1657.0   
+         119      5057.538462    4696.285714           5234.0         3840.0   
+         113      2094.461538    1944.857143           2242.0         1724.0   
+         58        949.538462     881.714286           1625.0         1586.0   
+         10      14893.076923   13829.285714          18471.0        13173.0   
+         134      1469.692308    1364.714286            579.0          175.0   
+         8        8044.000000    7469.428571          11936.0         8212.0   
+         167      3174.153846    2947.428571           2926.0         2442.0   
+         54       2216.307692    2058.000000           2498.0         1818.0   
+         40        802.769231     745.428571            606.0          440.0   
+         87       9353.846154    8685.714286          13183.0         8678.0   
+         ..               {\ldots}            {\ldots}              {\ldots}            {\ldots}   
+         115       635.384615     590.000000            663.0          574.0   
+         55       1366.000000    1268.428571           1560.0         1143.0   
+         177       363.692308     337.714286            501.0          401.0   
+         63        635.846154     590.428571            815.0          629.0   
+         53       1491.538462    1385.000000           1696.0         1273.0   
+         96        476.923077     442.857143            594.0          403.0   
+         26       4129.230769    3834.285714           4605.0         3137.0   
+         62       2039.384615    1893.714286           1777.0         1439.0   
+         174      2717.692308    2523.571429           3177.0         2480.0   
+         137      5814.769231    5399.428571           4146.0         3550.0   
+         42        370.615385     344.142857            275.0          200.0   
+         170      3174.461538    2947.714286           3490.0         2600.0   
+         2        4082.769231    3791.142857           5999.0         4079.0   
+         57       4910.153846    4559.428571           5484.0         4089.0   
+         157      2682.923077    2491.285714           3322.0         2343.0   
+         138      1065.692308     989.571429              0.0            0.0   
+         159       637.846154     592.285714            917.0          827.0   
+         111      7333.846154    6810.000000           7909.0         6116.0   
+         107      4751.076923    4411.714286           3049.0         1720.0   
+         124      1173.230769    1089.428571            411.0          126.0   
+         95       5537.230769    5141.714286           7305.0         5063.0   
+         80       3027.230769    2811.000000           1812.0         1191.0   
+         129      4731.230769    4393.285714           4014.0         3245.0   
+         179      1361.384615    1264.142857           1295.0          959.0   
+         25        871.692308     809.428571           1004.0          711.0   
+         77        598.307692     555.571429            673.0          487.0   
+         114      5173.076923    4803.571429           5753.0         4429.0   
+         19        272.000000     252.571429            239.0          197.0   
+         100      3760.923077    3492.285714           4563.0         3267.0   
+         110       358.000000     332.428571            380.0          360.0   
+         
+              Seven\_Day\_ADT  
+         85     1936.428571  
+         91     4514.714286  
+         44     4024.714286  
+         105    7745.714286  
+         94      462.142857  
+         169    3314.714286  
+         175    1317.714286  
+         152    7530.000000  
+         52     1251.571429  
+         102      98.285714  
+         147    2484.571429  
+         66     4075.142857  
+         79     1362.857143  
+         38     1435.571429  
+         128    3950.428571  
+         136    4453.714286  
+         145    1386.714286  
+         67     2489.571429  
+         178    1193.428571  
+         116    1753.571429  
+         119    5992.571429  
+         113    2511.428571  
+         58     1340.428571  
+         10    18349.857143  
+         134    1472.428571  
+         8     10347.714286  
+         167    3714.285714  
+         54     2674.571429  
+         40      894.857143  
+         87    11808.714286  
+         ..             {\ldots}  
+         115     766.714286  
+         55     1654.571429  
+         177     466.571429  
+         63      796.714286  
+         53     1809.142857  
+         96      585.285714  
+         26     4940.285714  
+         62     2353.142857  
+         174    3331.714286  
+         137    6498.857143  
+         42      412.000000  
+         170    3817.714286  
+         2      5230.857143  
+         57     5927.000000  
+         157    3300.571429  
+         138     989.571429  
+         159     841.428571  
+         111    8813.571429  
+         107    5093.000000  
+         124    1166.142857  
+         95     6908.571429  
+         80     3240.000000  
+         129    5430.285714  
+         179    1586.142857  
+         25     1054.428571  
+         77      721.285714  
+         114    6258.142857  
+         19      314.857143  
+         100    4610.857143  
+         110     438.142857  
+         
+         [86 rows x 9 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}96}]:} \PY{n}{df\PYZus{}copy} \PY{o}{=} \PY{n}{train\PYZus{}set}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}97}]:} \PY{n}{df\PYZus{}copy}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}97}]:}        Count\_Start\_Date  Monday\_Volume  Tuesday\_Volume  Wednesday\_Volume  \textbackslash{}
+         count         86.000000      86.000000       86.000000         86.000000   
+         mean      734715.732558    3441.019027     3154.267442       4205.689922   
+         std           10.845899    3776.648135     3461.927457       4615.903276   
+         min       734700.000000      85.636364       78.500000        104.666667   
+         25\%       734706.250000    1042.409091      955.541667       1274.055556   
+         50\%       734712.000000    1793.727273     1644.250000       2192.333333   
+         75\%       734722.000000    4488.909091     4114.833333       5486.444444   
+         max       734737.000000   20052.727273    18381.666667      24508.888889   
+         
+                Thursday\_Volume  Friday\_Volume  Saturday\_Volume  Sunday\_Volume  \textbackslash{}
+         count        86.000000      86.000000        86.000000      86.000000   
+         mean       2911.631485    2703.657807      3192.523256    2304.825581   
+         std        3195.625345    2967.366392      3887.928357    2684.437714   
+         min          72.461538      67.285714         0.000000       0.000000   
+         25\%         882.038462     819.035714       830.000000     652.500000   
+         50\%        1517.769231    1409.357143      1840.000000    1444.000000   
+         75\%        3798.307692    3527.000000      3847.250000    2800.000000   
+         max       16967.692308   15755.714286     21566.000000   14611.000000   
+         
+                Seven\_Day\_ADT  
+         count      86.000000  
+         mean     3488.993355  
+         std      3882.659091  
+         min        98.285714  
+         25\%      1024.535714  
+         50\%      1872.785714  
+         75\%      4586.821429  
+         max     20923.857143  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}98}]:} \PY{n}{df\PYZus{}copy}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}98}]:}                   Count\_Start\_Date  Monday\_Volume  Tuesday\_Volume  \textbackslash{}
+         Count\_Start\_Date          1.000000      -0.249739       -0.249739   
+         Monday\_Volume            -0.249739       1.000000        1.000000   
+         Tuesday\_Volume           -0.249739       1.000000        1.000000   
+         Wednesday\_Volume         -0.249739       1.000000        1.000000   
+         Thursday\_Volume          -0.249739       1.000000        1.000000   
+         Friday\_Volume            -0.249739       1.000000        1.000000   
+         Saturday\_Volume          -0.272850       0.970465        0.970465   
+         Sunday\_Volume            -0.260492       0.963049        0.963049   
+         Seven\_Day\_ADT            -0.255626       0.998208        0.998208   
+         
+                           Wednesday\_Volume  Thursday\_Volume  Friday\_Volume  \textbackslash{}
+         Count\_Start\_Date         -0.249739        -0.249739      -0.249739   
+         Monday\_Volume             1.000000         1.000000       1.000000   
+         Tuesday\_Volume            1.000000         1.000000       1.000000   
+         Wednesday\_Volume          1.000000         1.000000       1.000000   
+         Thursday\_Volume           1.000000         1.000000       1.000000   
+         Friday\_Volume             1.000000         1.000000       1.000000   
+         Saturday\_Volume           0.970465         0.970465       0.970465   
+         Sunday\_Volume             0.963049         0.963049       0.963049   
+         Seven\_Day\_ADT             0.998208         0.998208       0.998208   
+         
+                           Saturday\_Volume  Sunday\_Volume  Seven\_Day\_ADT  
+         Count\_Start\_Date        -0.272850      -0.260492      -0.255626  
+         Monday\_Volume            0.970465       0.963049       0.998208  
+         Tuesday\_Volume           0.970465       0.963049       0.998208  
+         Wednesday\_Volume         0.970465       0.963049       0.998208  
+         Thursday\_Volume          0.970465       0.963049       0.998208  
+         Friday\_Volume            0.970465       0.963049       0.998208  
+         Saturday\_Volume          1.000000       0.994137       0.982931  
+         Sunday\_Volume            0.994137       1.000000       0.977004  
+         Seven\_Day\_ADT            0.982931       0.977004       1.000000  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}99}]:} \PY{n}{df\PYZus{}copy}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Count\PYZus{}Start\PYZus{}Date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Seven\PYZus{}Day\PYZus{}ADT}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}99}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1c1492f6a0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}100}]:} \PY{n}{train\PYZus{}set\PYZus{}full} \PY{o}{=} \PY{n}{train\PYZus{}set}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{train\PYZus{}set} \PY{o}{=} \PY{n}{train\PYZus{}set}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Seven\PYZus{}Day\PYZus{}ADT}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}101}]:} \PY{n}{train\PYZus{}labels} \PY{o}{=} \PY{n}{df\PYZus{}copy}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Seven\PYZus{}Day\PYZus{}ADT}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}102}]:} \PY{n}{lin\PYZus{}reg} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{lin\PYZus{}reg}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{train\PYZus{}set}\PY{p}{,} \PY{n}{train\PYZus{}labels}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}102}]:} LinearRegression(copy\_X=True, fit\_intercept=True, n\_jobs=1, normalize=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}103}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Coefficients: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{lin\PYZus{}reg}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Intercept: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{lin\PYZus{}reg}\PY{o}{.}\PY{n}{intercept\PYZus{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Coefficients:  [2.46105248e-14 1.68339876e-01 1.54311553e-01 2.05748737e-01
+ 1.42441434e-01 1.32267045e-01 1.42857143e-01 1.42857143e-01]
+Intercept:  -1.80812094185967e-08
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}104}]:} \PY{n}{test\PYZus{}set}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}104}]:}      Count\_Start\_Date  Monday\_Volume  Tuesday\_Volume  Wednesday\_Volume  \textbackslash{}
+          82             734712    8516.363636     7806.666667      10408.888889   
+          146            734729     689.454545      632.000000        842.666667   
+          160            734732    1070.363636      981.166667       1308.222222   
+          65             734711     591.090909      541.833333        722.444444   
+          164            734733    2721.272727     2494.500000       3326.000000   
+          173            734734    2638.545455     2418.666667       3224.888889   
+          93             734712    5800.909091     5317.500000       7090.000000   
+          150            734729     695.636364      637.666667        850.222222   
+          122            734719    4786.000000     4387.166667       5849.555556   
+          36             734704     350.545455      321.333333        428.444444   
+          131            734719    8431.818182     7729.166667      10305.555556   
+          117            734718    2608.181818     2390.833333       3187.777778   
+          46             734704     704.363636      645.666667        860.888889   
+          98             734712    3917.636364     3591.166667       4788.222222   
+          154            734730    5250.000000     4812.500000       6416.666667   
+          20             734702     527.272727      483.333333        644.444444   
+          144            734728    9258.545455     8487.000000      11316.000000   
+          29             734703    1033.818182      947.666667       1263.555556   
+          81             734712    4502.000000     4126.833333       5502.444444   
+          153            734730    3091.090909     2833.500000       3778.000000   
+          34             734703     774.000000      709.500000        946.000000   
+          35             734704     831.454545      762.166667       1016.222222   
+          60             734711    1255.272727     1150.666667       1534.222222   
+          121            734719     802.545455      735.666667        980.888889   
+          176            734735    3316.727273     3040.333333       4053.777778   
+          24             734702     461.272727      422.833333        563.777778   
+          21             734702    2547.636364     2335.333333       3113.777778   
+          112            734716    2770.181818     2539.333333       3385.777778   
+          23             734702    2047.272727     1876.666667       2502.222222   
+          17             734700    1137.636364     1042.833333       1390.444444   
+          ..                {\ldots}            {\ldots}             {\ldots}               {\ldots}   
+          103            734714    4204.363636     3854.000000       5138.666667   
+          72             734711    5225.272727     4789.833333       6386.444444   
+          168            734733   18189.272727    16673.500000      22231.333333   
+          16             734700    2103.090909     1927.833333       2570.444444   
+          75             734711    6655.454545     6100.833333       8134.444444   
+          171            734734    2827.454545     2591.833333       3455.777778   
+          11             734700   21258.727273    19487.166667      25982.888889   
+          32             734703    2055.454545     1884.166667       2512.222222   
+          123            734719    5225.636364     4790.166667       6386.888889   
+          9              734700    9267.818182     8495.500000      11327.333333   
+          37             734704     953.090909      873.666667       1164.888889   
+          74             734711    1064.363636      975.666667       1300.888889   
+          125            734719    6007.272727     5506.666667       7342.222222   
+          143            734728     146.545455      134.333333        179.111111   
+          15             734700    7145.454545     6550.000000       8733.333333   
+          120            734719     374.909091      343.666667        458.222222   
+          127            734719    1469.818182     1347.333333       1796.444444   
+          1              734699   15758.545455    14445.333333      19260.444444   
+          166            734733    2609.272727     2391.833333       3189.111111   
+          172            734734    2746.545455     2517.666667       3356.888889   
+          69             734711     372.363636      341.333333        455.111111   
+          49             734705    1088.363636      997.666667       1330.222222   
+          101            734713    6153.272727     5640.500000       7520.666667   
+          33             734703    1808.363636     1657.666667       2210.222222   
+          45             734704    1351.636364     1239.000000       1652.000000   
+          130            734719   11820.363636    10835.333333      14447.111111   
+          30             734703    1643.636364     1506.666667       2008.888889   
+          28             734703    1338.545455     1227.000000       1636.000000   
+          135            734721    1690.545455     1549.666667       2066.222222   
+          88             734712    1885.272727     1728.166667       2304.222222   
+          
+               Thursday\_Volume  Friday\_Volume  Saturday\_Volume  Sunday\_Volume  \textbackslash{}
+          82       7206.153846    6691.428571           8958.0         7343.0   
+          146       583.384615     541.714286            458.0          449.0   
+          160       905.692308     841.000000           1238.0         1186.0   
+          65        500.153846     464.428571            430.0          458.0   
+          164      2302.615385    2138.142857           3077.0         2722.0   
+          173      2232.615385    2073.142857           3632.0         2583.0   
+          93       4908.461538    4557.857143           7025.0         5068.0   
+          150       588.615385     546.571429            725.0          536.0   
+          122      4049.692308    3760.428571           4054.0         2908.0   
+          36        296.615385     275.428571            273.0          176.0   
+          131      7134.615385    6625.000000           6947.0         5519.0   
+          117      2206.923077    2049.285714           2373.0         2382.0   
+          46        596.000000     553.428571            492.0          245.0   
+          98       3314.923077    3078.142857           4093.0         3173.0   
+          154      4442.307692    4125.000000           4281.0         3301.0   
+          20        446.153846     414.285714            412.0          288.0   
+          144      7834.153846    7274.571429           9829.0         6776.0   
+          29        874.769231     812.285714           1183.0          705.0   
+          81       3809.384615    3537.285714           1558.0          801.0   
+          153      2615.538462    2428.714286           3415.0         2839.0   
+          34        654.923077     608.142857            832.0          641.0   
+          35        703.538462     653.285714            511.0          344.0   
+          60       1062.153846     986.285714           1071.0          889.0   
+          121       679.076923     630.571429            161.0           62.0   
+          176      2806.461538    2606.000000           3043.0         2416.0   
+          24        390.307692     362.428571            543.0          396.0   
+          21       2155.692308    2001.714286            862.0          193.0   
+          112      2344.000000    2176.571429           2609.0         2008.0   
+          23       1732.307692    1608.571429           2116.0         1449.0   
+          17        962.615385     893.857143            308.0          373.0   
+          ..               {\ldots}            {\ldots}              {\ldots}            {\ldots}   
+          103      3557.538462    3303.428571           4655.0         4281.0   
+          72       4421.384615    4105.571429           4625.0         3439.0   
+          168     15390.923077   14291.571429          19535.0        16730.0   
+          16       1779.538462    1652.428571            924.0         1639.0   
+          75       5631.538462    5229.285714           5437.0         3960.0   
+          171      2392.461538    2221.571429           3028.0         2054.0   
+          11      17988.153846   16703.285714          20804.0        14265.0   
+          32       1739.230769    1615.000000           2380.0         2095.0   
+          123      4421.692308    4105.857143           4043.0         3068.0   
+          9        7842.000000    7281.857143           6769.0         4727.0   
+          37        806.461538     748.857143            789.0          592.0   
+          74        900.615385     836.285714            913.0          558.0   
+          125      5083.076923    4720.000000           1595.0         1351.0   
+          143       124.000000     115.142857            189.0          184.0   
+          15       6046.153846    5614.285714           4580.0         3039.0   
+          120       317.230769     294.571429            165.0          143.0   
+          127      1243.692308    1154.857143           1794.0         1341.0   
+          1       13334.153846   12381.714286          12921.0        10026.0   
+          166      2207.846154    2050.142857           2932.0         2368.0   
+          172      2324.000000    2158.000000           2582.0         2036.0   
+          69        315.076923     292.571429            466.0          409.0   
+          49        920.923077     855.142857            878.0          677.0   
+          101      5206.615385    4834.714286           5175.0         3838.0   
+          33       1530.153846    1420.857143           1876.0         1310.0   
+          45       1143.692308    1062.000000            924.0          523.0   
+          130     10001.846154    9287.428571          11256.0         8630.0   
+          30       1390.769231    1291.428571           2019.0         1583.0   
+          28       1132.615385    1051.714286           1046.0          716.0   
+          135      1430.461538    1328.285714           1819.0         1355.0   
+          88       1595.230769    1481.285714           1896.0         1520.0   
+          
+               Seven\_Day\_ADT  
+          82     9020.142857  
+          146     671.285714  
+          160    1187.285714  
+          65      591.285714  
+          164    2966.571429  
+          173    2961.000000  
+          93     6285.428571  
+          150     726.714286  
+          122    4755.000000  
+          36      339.571429  
+          131    8405.857143  
+          117    2728.571429  
+          46      658.714286  
+          98     4116.142857  
+          154    5208.142857  
+          20      514.285714  
+          144    9646.714286  
+          29     1082.000000  
+          81     3874.285714  
+          153    3322.142857  
+          34      818.571429  
+          35      775.428571  
+          60     1266.285714  
+          121     662.428571  
+          176    3385.857143  
+          24      496.571429  
+          21     2152.428571  
+          112    2836.142857  
+          23     2117.857143  
+          17      991.142857  
+          ..             {\ldots}  
+          103    4580.000000  
+          72     5257.571429  
+          168   19472.285714  
+          16     2018.571429  
+          75     6571.714286  
+          171    2947.571429  
+          11    21713.142857  
+          32     2254.285714  
+          123    5121.714286  
+          9      8924.142857  
+          37      946.142857  
+          74     1046.428571  
+          125    5140.857143  
+          143     168.428571  
+          15     6702.714286  
+          120     338.571429  
+          127    1602.714286  
+          1     15659.857143  
+          166    2807.285714  
+          172    2817.714286  
+          69      417.571429  
+          49     1077.285714  
+          101    6122.285714  
+          33     1876.000000  
+          45     1268.714286  
+          130   12128.285714  
+          30     1806.000000  
+          28     1303.428571  
+          135    1781.714286  
+          88     1969.285714  
+          
+          [86 rows x 9 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}105}]:} \PY{n}{train\PYZus{}set}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}105}]:}      Count\_Start\_Date  Monday\_Volume  Tuesday\_Volume  Wednesday\_Volume  \textbackslash{}
+          85             734712    1824.727273     1672.666667       2230.222222   
+          91             734712    4237.454545     3884.333333       5179.111111   
+          44             734704    3875.636364     3552.666667       4736.888889   
+          105            734715    7806.727273     7156.166667       9541.555556   
+          94             734712     498.363636      456.833333        609.111111   
+          169            734734    3259.454545     2987.833333       3983.777778   
+          175            734734    1191.818182     1092.500000       1456.666667   
+          152            734730    7751.636364     7105.666667       9474.222222   
+          52             734705    1285.454545     1178.333333       1571.111111   
+          102            734714      85.636364       78.500000        104.666667   
+          147            734729    2483.272727     2276.333333       3035.111111   
+          66             734711    4033.818182     3697.666667       4930.222222   
+          79             734711    1253.818182     1149.333333       1532.444444   
+          38             734704    1309.636364     1200.500000       1600.666667   
+          128            734719    4014.545455     3680.000000       4906.666667   
+          136            734721    4503.636364     4128.333333       5504.444444   
+          145            734728    1273.818182     1167.666667       1556.888889   
+          67             734711    2518.363636     2308.500000       3078.000000   
+          178            734737    1198.181818     1098.333333       1464.444444   
+          116            734718    1590.909091     1458.333333       1944.444444   
+          119            734718    5977.090909     5479.000000       7305.333333   
+          113            734716    2475.272727     2269.000000       3025.333333   
+          58             734710    1122.181818     1028.666667       1371.555556   
+          10             734700   17600.909091    16134.166667      21512.222222   
+          134            734720    1736.909091     1592.166667       2122.888889   
+          8              734700    9506.545455     8714.333333      11619.111111   
+          167            734733    3751.272727     3438.666667       4584.888889   
+          54             734705    2619.272727     2401.000000       3201.333333   
+          40             734704     948.727273      869.666667       1159.555556   
+          87             734712   11054.545455    10133.333333      13511.111111   
+          ..                {\ldots}            {\ldots}             {\ldots}               {\ldots}   
+          115            734718     750.909091      688.333333        917.777778   
+          55             734705    1614.363636     1479.833333       1973.111111   
+          177            734736     429.818182      394.000000        525.333333   
+          63             734711     751.454545      688.833333        918.444444   
+          53             734705    1762.727273     1615.833333       2154.444444   
+          96             734712     563.636364      516.666667        688.888889   
+          26             734703    4880.000000     4473.333333       5964.444444   
+          62             734711    2410.181818     2209.333333       2945.777778   
+          174            734734    3211.818182     2944.166667       3925.555556   
+          137            734721    6872.000000     6299.333333       8399.111111   
+          42             734704     438.000000      401.500000        535.333333   
+          170            734734    3751.636364     3439.000000       4585.333333   
+          2              734700    4825.090909     4423.000000       5897.333333   
+          57             734705    5802.909091     5319.333333       7092.444444   
+          157            734732    3170.727273     2906.500000       3875.333333   
+          138            734722    1259.454545     1154.500000       1539.333333   
+          159            734732     753.818182      691.000000        921.333333   
+          111            734716    8667.272727     7945.000000      10593.333333   
+          107            734715    5614.909091     5147.000000       6862.666667   
+          124            734719    1386.545455     1271.000000       1694.666667   
+          95             734712    6544.000000     5998.666667       7998.222222   
+          80             734712    3577.636364     3279.500000       4372.666667   
+          129            734719    5591.454545     5125.500000       6834.000000   
+          179            734737    1608.909091     1474.833333       1966.444444   
+          25             734703    1030.181818      944.333333       1259.111111   
+          77             734711     707.090909      648.166667        864.222222   
+          114            734716    6113.636364     5604.166667       7472.222222   
+          19             734702     321.454545      294.666667        392.888889   
+          100            734712    4444.727273     4074.333333       5432.444444   
+          110            734716     423.090909      387.833333        517.111111   
+          
+               Thursday\_Volume  Friday\_Volume  Saturday\_Volume  Sunday\_Volume  
+          85       1544.000000    1433.714286           2070.0         1449.0  
+          91       3585.538462    3329.428571           4939.0         3358.0  
+          44       3279.384615    3045.142857           3896.0         2961.0  
+          105      6605.692308    6133.857143           6422.0         4861.0  
+          94        421.692308     391.571429            285.0          209.0  
+          169      2758.000000    2561.000000           2860.0         2416.0  
+          175      1008.461538     936.428571           1599.0         1070.0  
+          152      6559.076923    6090.571429           6851.0         3225.0  
+          52       1087.692308    1010.000000           1004.0          687.0  
+          102        72.461538      67.285714             90.0          127.0  
+          147      2101.230769    1951.142857           2108.0         1626.0  
+          66       3413.230769    3169.428571           3625.0         2715.0  
+          79       1060.923077     985.142857           1552.0         1092.0  
+          38       1108.153846    1029.000000           1614.0         1232.0  
+          128      3396.923077    3154.285714           3171.0         2402.0  
+          136      3810.769231    3538.571429           3701.0         2705.0  
+          145      1077.846154    1000.857143           1415.0         1286.0  
+          67       2130.923077    1978.714286           1987.0         1589.0  
+          178      1013.846154     941.428571            952.0          812.0  
+          116      1346.153846    1250.000000           1868.0         1657.0  
+          119      5057.538462    4696.285714           5234.0         3840.0  
+          113      2094.461538    1944.857143           2242.0         1724.0  
+          58        949.538462     881.714286           1625.0         1586.0  
+          10      14893.076923   13829.285714          18471.0        13173.0  
+          134      1469.692308    1364.714286            579.0          175.0  
+          8        8044.000000    7469.428571          11936.0         8212.0  
+          167      3174.153846    2947.428571           2926.0         2442.0  
+          54       2216.307692    2058.000000           2498.0         1818.0  
+          40        802.769231     745.428571            606.0          440.0  
+          87       9353.846154    8685.714286          13183.0         8678.0  
+          ..               {\ldots}            {\ldots}              {\ldots}            {\ldots}  
+          115       635.384615     590.000000            663.0          574.0  
+          55       1366.000000    1268.428571           1560.0         1143.0  
+          177       363.692308     337.714286            501.0          401.0  
+          63        635.846154     590.428571            815.0          629.0  
+          53       1491.538462    1385.000000           1696.0         1273.0  
+          96        476.923077     442.857143            594.0          403.0  
+          26       4129.230769    3834.285714           4605.0         3137.0  
+          62       2039.384615    1893.714286           1777.0         1439.0  
+          174      2717.692308    2523.571429           3177.0         2480.0  
+          137      5814.769231    5399.428571           4146.0         3550.0  
+          42        370.615385     344.142857            275.0          200.0  
+          170      3174.461538    2947.714286           3490.0         2600.0  
+          2        4082.769231    3791.142857           5999.0         4079.0  
+          57       4910.153846    4559.428571           5484.0         4089.0  
+          157      2682.923077    2491.285714           3322.0         2343.0  
+          138      1065.692308     989.571429              0.0            0.0  
+          159       637.846154     592.285714            917.0          827.0  
+          111      7333.846154    6810.000000           7909.0         6116.0  
+          107      4751.076923    4411.714286           3049.0         1720.0  
+          124      1173.230769    1089.428571            411.0          126.0  
+          95       5537.230769    5141.714286           7305.0         5063.0  
+          80       3027.230769    2811.000000           1812.0         1191.0  
+          129      4731.230769    4393.285714           4014.0         3245.0  
+          179      1361.384615    1264.142857           1295.0          959.0  
+          25        871.692308     809.428571           1004.0          711.0  
+          77        598.307692     555.571429            673.0          487.0  
+          114      5173.076923    4803.571429           5753.0         4429.0  
+          19        272.000000     252.571429            239.0          197.0  
+          100      3760.923077    3492.285714           4563.0         3267.0  
+          110       358.000000     332.428571            380.0          360.0  
+          
+          [86 rows x 8 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}106}]:} \PY{n}{test\PYZus{}set\PYZus{}a}\PY{o}{=}\PY{n}{test\PYZus{}set}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Seven\PYZus{}Day\PYZus{}ADT}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{traffic} \PY{o}{=} \PY{n}{lin\PYZus{}reg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{test\PYZus{}set\PYZus{}a}\PY{p}{)}
+          
+          \PY{n}{traffic}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}106}]:} array([ 9020.14285714,   671.28571429,  1187.28571429,   591.28571429,
+                  2966.57142857,  2961.        ,  6285.42857143,   726.71428571,
+                  4755.        ,   339.57142857,  8405.85714286,  2728.57142857,
+                   658.71428571,  4116.14285714,  5208.14285714,   514.28571429,
+                  9646.71428571,  1082.        ,  3874.28571429,  3322.14285714,
+                   818.57142857,   775.42857143,  1266.28571429,   662.42857143,
+                  3385.85714286,   496.57142857,  2152.42857143,  2836.14285714,
+                  2117.85714286,   991.14285714, 10301.28571429, 13256.28571429,
+                   840.57142857,  1731.57142857,  4747.57142857,   375.42857143,
+                  1893.57142857,   500.28571429, 11948.85714286,  2609.85714286,
+                  2444.42857143,  5820.57142857,  6259.71428571, 10159.28571429,
+                  1984.85714286,  2226.57142857,   685.14285714,  2616.28571429,
+                  4177.14285714,  2428.85714286,  2213.28571429,  4607.71428571,
+                  1879.57142857,  4989.71428571,   194.85714286,  2213.71428571,
+                  4580.        ,  5257.57142857, 19472.28571429,  2018.57142857,
+                  6571.71428571,  2947.57142857, 21713.14285714,  2254.28571429,
+                  5121.71428571,  8924.14285714,   946.14285714,  1046.42857143,
+                  5140.85714286,   168.42857143,  6702.71428571,   338.57142857,
+                  1602.71428571, 15659.85714286,  2807.28571429,  2817.71428571,
+                   417.57142857,  1077.28571429,  6122.28571429,  1876.        ,
+                  1268.71428571, 12128.28571429,  1806.        ,  1303.42857143,
+                  1781.71428571,  1969.28571429])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}107}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{traffic}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{test\PYZus{}set}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Seven\PYZus{}Day\PYZus{}ADT}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ 9020.14285714   671.28571429  1187.28571429   591.28571429
+  2966.57142857  2961.          6285.42857143   726.71428571
+  4755.           339.57142857  8405.85714286  2728.57142857
+   658.71428571  4116.14285714  5208.14285714   514.28571429
+  9646.71428571  1082.          3874.28571429  3322.14285714
+   818.57142857   775.42857143  1266.28571429   662.42857143
+  3385.85714286   496.57142857  2152.42857143  2836.14285714
+  2117.85714286   991.14285714 10301.28571429 13256.28571429
+   840.57142857  1731.57142857  4747.57142857   375.42857143
+  1893.57142857   500.28571429 11948.85714286  2609.85714286
+  2444.42857143  5820.57142857  6259.71428571 10159.28571429
+  1984.85714286  2226.57142857   685.14285714  2616.28571429
+  4177.14285714  2428.85714286  2213.28571429  4607.71428571
+  1879.57142857  4989.71428571   194.85714286  2213.71428571
+  4580.          5257.57142857 19472.28571429  2018.57142857
+  6571.71428571  2947.57142857 21713.14285714  2254.28571429
+  5121.71428571  8924.14285714   946.14285714  1046.42857143
+  5140.85714286   168.42857143  6702.71428571   338.57142857
+  1602.71428571 15659.85714286  2807.28571429  2817.71428571
+   417.57142857  1077.28571429  6122.28571429  1876.
+  1268.71428571 12128.28571429  1806.          1303.42857143
+  1781.71428571  1969.28571429]
+82      9020.142857
+146      671.285714
+160     1187.285714
+65       591.285714
+164     2966.571429
+173     2961.000000
+93      6285.428571
+150      726.714286
+122     4755.000000
+36       339.571429
+131     8405.857143
+117     2728.571429
+46       658.714286
+98      4116.142857
+154     5208.142857
+20       514.285714
+144     9646.714286
+29      1082.000000
+81      3874.285714
+153     3322.142857
+34       818.571429
+35       775.428571
+60      1266.285714
+121      662.428571
+176     3385.857143
+24       496.571429
+21      2152.428571
+112     2836.142857
+23      2117.857143
+17       991.142857
+           {\ldots}     
+103     4580.000000
+72      5257.571429
+168    19472.285714
+16      2018.571429
+75      6571.714286
+171     2947.571429
+11     21713.142857
+32      2254.285714
+123     5121.714286
+9       8924.142857
+37       946.142857
+74      1046.428571
+125     5140.857143
+143      168.428571
+15      6702.714286
+120      338.571429
+127     1602.714286
+1      15659.857143
+166     2807.285714
+172     2817.714286
+69       417.571429
+49      1077.285714
+101     6122.285714
+33      1876.000000
+45      1268.714286
+130    12128.285714
+30      1806.000000
+28      1303.428571
+135     1781.714286
+88      1969.285714
+Name: Seven\_Day\_ADT, Length: 86, dtype: float64
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}108}]:} \PY{n}{lin\PYZus{}reg}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{test\PYZus{}set\PYZus{}a}\PY{p}{,} \PY{n}{test\PYZus{}set}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Seven\PYZus{}Day\PYZus{}ADT}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}108}]:} 1.0
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
